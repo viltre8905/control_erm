@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet id="authorities_insert" author="viltre" context="init_Data">
+        <comment>Insert authorities data</comment>
+        <insert tableName="auth_user">
+            <column name="enabled" value="TRUE"/>
+            <column name="user_name" value="admin"/>
+            <column name="password" value="0192023a7bbd73250516f069df18b500"/>
+            <column name="first_name" value="Administrador"/>
+            <column name="last_name" value="Administrador"/>
+            <column name="accountnonlocked" value="TRUE"/>
+        </insert>
+        <insert tableName="auth_role">
+            <column name="name" value="Super-Administrador"/>
+            <column name="description" value="Super-Administrador del sistema"/>
+            <column name="value" value="ROLE_SUPER_ADMIN"/>
+        </insert>
+        <insert tableName="auth_role">
+            <column name="name" value="Administrador"/>
+            <column name="description" value="Administrador del sistema"/>
+            <column name="value" value="ROLE_ADMIN"/>
+        </insert>
+        <insert tableName="auth_role">
+            <column name="name" value="Supervisor General"/>
+            <column name="description" value="Supervisor General"/>
+            <column name="value" value="ROLE_GENERAL_SUPERVISORY"/>
+        </insert>
+        <insert tableName="auth_role">
+            <column name="name" value="Supervisor de procesos"/>
+            <column name="description" value="Supervisor de procesos"/>
+            <column name="value" value="ROLE_PROCESS_SUPERVISORY"/>
+        </insert>
+        <insert tableName="auth_role">
+            <column name="name" value="Ejecutor"/>
+            <column name="description" value="Ejecutor"/>
+            <column name="value" value="ROLE_EXECUTER"/>
+        </insert>
+        <insert tableName="auth_role">
+            <column name="name" value="Supervisor de sub-procesos"/>
+            <column name="description" value="Supervisor de sub-procesos"/>
+            <column name="value" value="ROLE_SUBPROCESS_SUPERVISORY"/>
+        </insert>
+        <insert tableName="auth_role">
+            <column name="name" value="Miembro del comité de control"/>
+            <column name="description" value="Miembro del comité de prevención y control"/>
+            <column name="value" value="ROLE_COMMITTEE_MEMBER"/>
+        </insert>
+        <insert tableName="auth_role">
+            <column name="name" value="Secretario del comité de control"/>
+            <column name="description" value="Secretario del comité de prevención y control"/>
+            <column name="value" value="ROLE_SECRETARY_COMMITTEE"/>
+        </insert>
+        <insert tableName="auth_role">
+            <column name="name" value="Responsable de actividad"/>
+            <column name="description" value="Responsable de actividad"/>
+            <column name="value" value="ROLE_ACTIVITY_RESPONSIBLE"/>
+        </insert>
+        <insert tableName="user_role">
+            <column name="user_id" value="1"/>
+            <column name="role_id" value="1"/>
+        </insert>
+    </changeSet>
+    <changeSet id="extra_tables_insert" author="viltre" context="init_Data">
+        <comment>Insert extra data</comment>
+        <insert tableName="n_component">
+            <column name="name" value="Entorno de Control"/>
+            <column name="code" value="ec"/>
+        </insert>
+        <insert tableName="n_component">
+            <column name="name" value="Evaluación de Riesgo"/>
+            <column name="code" value="er"/>
+        </insert>
+        <insert tableName="n_component">
+            <column name="name" value="Actividades de Control"/>
+            <column name="code" value="ac"/>
+        </insert>
+        <insert tableName="n_component">
+            <column name="name" value="Información y Comunicación"/>
+            <column name="code" value="ic"/>
+        </insert>
+        <insert tableName="n_component">
+            <column name="name" value="Supervisión y Monitoreo"/>
+            <column name="code" value="sm"/>
+        </insert>
+        <insert tableName="activity_state">
+            <column name="name" value="Asignada"/>
+        </insert>
+        <insert tableName="activity_state">
+            <column name="name" value="Resuelta"/>
+        </insert>
+        <insert tableName="activity_state">
+            <column name="name" value="Aceptada"/>
+        </insert>
+        <insert tableName="activity_state">
+            <column name="name" value="Rechazada"/>
+        </insert>
+        <insert tableName="n_efficacy">
+            <column name="name" value="Eficaz"/>
+            <column name="percent" value="90"/>
+        </insert>
+        <insert tableName="n_efficacy">
+            <column name="name" value="Eficaz con salvedad"/>
+            <column name="percent" value="70"/>
+        </insert>
+        <insert tableName="n_efficacy">
+            <column name="name" value="Ineficaz"/>
+            <column name="percent" value="0"/>
+        </insert>
+        <insert tableName="n_ocupation">
+            <column name="name" value="Director"/>
+        </insert>
+        <insert tableName="n_ocupation">
+            <column name="name" value="Director Adjunto"/>
+        </insert>
+        <insert tableName="n_ocupation">
+            <column name="name" value="Administrador"/>
+        </insert>
+        <insert tableName="n_ocupation">
+            <column name="name" value="Director General"/>
+        </insert>
+        <insert tableName="n_ocupation">
+            <column name="name" value="Subdirector"/>
+        </insert>
+        <insert tableName="n_ocupation">
+            <column name="name" value="Jefe de Departamento"/>
+        </insert>
+        <insert tableName="n_ocupation">
+            <column name="name" value="Jefe de Grupo"/>
+        </insert>
+        <insert tableName="n_ocupation">
+            <column name="name" value="Especialista Principal"/>
+        </insert>
+        <insert tableName="n_ocupation">
+            <column name="name" value="Especialista"/>
+        </insert>
+        <insert tableName="n_ocupation">
+            <column name="name" value="Abogado"/>
+        </insert>
+        <insert tableName="n_ocupation">
+            <column name="name" value="Auditor"/>
+        </insert>
+        <insert tableName="n_ocupation">
+            <column name="name" value="Secretaria"/>
+        </insert>
+        <insert tableName="n_document_type">
+            <column name="name" value="Ley"/>
+        </insert>
+        <insert tableName="n_document_type">
+            <column name="name" value="Decreto"/>
+        </insert>
+        <insert tableName="n_document_type">
+            <column name="name" value="Decreto Ley"/>
+        </insert>
+        <insert tableName="n_document_type">
+            <column name="name" value="Resolucion"/>
+        </insert>
+        <insert tableName="n_document_type">
+            <column name="name" value="Instruccion"/>
+        </insert>
+        <insert tableName="n_document_type">
+            <column name="name" value="Carta"/>
+        </insert>
+        <insert tableName="n_document_type">
+            <column name="name" value="Carta Circular"/>
+        </insert>
+        <insert tableName="n_document_type">
+            <column name="name" value="Acta"/>
+        </insert>
+        <insert tableName="n_document_type">
+            <column name="name" value="Manual"/>
+        </insert>
+        <insert tableName="n_document_type">
+            <column name="name" value="Procedimiento"/>
+        </insert>
+        <insert tableName="n_document_type">
+            <column name="name" value="Plan"/>
+        </insert>
+        <insert tableName="n_document_type">
+            <column name="name" value="Contrato"/>
+        </insert>
+        <insert tableName="n_control_action">
+            <column name="name" value="Auditoria Interna"/>
+        </insert>
+        <insert tableName="n_control_action">
+            <column name="name" value="Auditoria Externa"/>
+        </insert>
+        <insert tableName="n_control_action">
+            <column name="name" value="Control Externo"/>
+        </insert>
+        <insert tableName="n_control_action">
+            <column name="name" value="Control Interno"/>
+        </insert>
+        <insert tableName="n_document_procedence">
+            <column name="name" value="INTERNO"/>
+        </insert>
+        <insert tableName="n_document_procedence">
+            <column name="name" value="ONAT"/>
+        </insert>
+        <insert tableName="n_document_procedence">
+            <column name="name" value="CGR"/>
+        </insert>
+        <insert tableName="n_document_procedence">
+            <column name="name" value="MTSS"/>
+        </insert>
+        <insert tableName="n_document_procedence">
+            <column name="name" value="ONE"/>
+        </insert>
+        <insert tableName="n_document_procedence">
+            <column name="name" value="MINJUS"/>
+        </insert>
+        <insert tableName="n_document_procedence">
+            <column name="name" value="MICON"/>
+        </insert>
+        <insert tableName="n_document_procedence">
+            <column name="name" value="MICONS"/>
+        </insert>
+        <insert tableName="n_document_procedence">
+            <column name="name" value="MEP"/>
+        </insert>
+        <insert tableName="n_document_procedence">
+            <column name="name" value="MFP"/>
+        </insert>
+        <insert tableName="n_document_procedence">
+            <column name="name" value="INRH"/>
+        </insert>
+        <insert tableName="n_document_procedence">
+            <column name="name" value="CITMA"/>
+        </insert>
+        <insert tableName="n_document_procedence">
+            <column name="name" value="MINED"/>
+        </insert>
+        <insert tableName="n_document_procedence">
+            <column name="name" value="MES"/>
+        </insert>
+        <insert tableName="n_document_procedence">
+            <column name="name" value="MINREX"/>
+        </insert>
+        <insert tableName="n_document_procedence">
+            <column name="name" value="MINBAS"/>
+        </insert>
+        <insert tableName="n_document_procedence">
+            <column name="name" value="MINAG"/>
+        </insert>
+        <insert tableName="n_document_procedence">
+            <column name="name" value="MINEN"/>
+        </insert>
+        <insert tableName="n_document_procedence">
+            <column name="name" value="MINCEX"/>
+        </insert>
+        <insert tableName="n_document_procedence">
+            <column name="name" value="MINCIN"/>
+        </insert>
+        <insert tableName="n_document_procedence">
+            <column name="name" value="MINFAR"/>
+        </insert>
+        <insert tableName="n_document_procedence">
+            <column name="name" value="MINIT"/>
+        </insert>
+        <insert tableName="n_document_procedence">
+            <column name="name" value="MINTUR"/>
+        </insert>
+        <insert tableName="n_document_procedence">
+            <column name="name" value="TSPP"/>
+        </insert>
+        <insert tableName="n_document_procedence">
+            <column name="name" value="INDER"/>
+        </insert>
+        <insert tableName="n_task_name">
+            <column name="name" value="Backup"/>
+            <column name="description" value="Tarea para realizar salvas periódicas a la base de datos."/>
+        </insert>
+        <insert tableName="task">
+            <column name="task_name_id" value="1"/>
+            <column name="stopped" value="true"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

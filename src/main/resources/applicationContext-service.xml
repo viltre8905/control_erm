@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                        http://www.springframework.org/schema/tx
+                        http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-3.1.xsd"
+>
+    <!--Load general properties-->
+    <context:property-placeholder location="classpath:application.properties,
+    classpath:datasource.properties" ignore-unresolvable="true"/>
+    <!--  **************************  DATA ACCESS OBJECTS  *************************  -->
+    <bean id="userDAO" class="com.verynet.gcint.api.db.hibernate.HibernateUserDAO">
+        <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <bean id="roleDAO" class="com.verynet.gcint.api.db.hibernate.HibernateRoleDAO">
+        <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <bean id="entityDAO" class="com.verynet.gcint.api.db.hibernate.HibernateEntityDAO">
+        <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <bean id="strategicObjectiveDAO" class="com.verynet.gcint.api.db.hibernate.HibernateStrategicObjectiveDAO">
+        <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <bean id="nomenclatureDAO" class="com.verynet.gcint.api.db.hibernate.HibernateNomenclatureDAO">
+        <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <bean id="processDAO" class="com.verynet.gcint.api.db.hibernate.HibernateProcessDAO">
+        <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <bean id="activityProcessDAO" class="com.verynet.gcint.api.db.hibernate.HibernateActivityProcessDAO">
+        <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <bean id="guideDAO" class="com.verynet.gcint.api.db.hibernate.HibernateGuideDAO">
+        <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <bean id="questionDAO" class="com.verynet.gcint.api.db.hibernate.HibernateQuestionDAO">
+        <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <bean id="documentDAO" class="com.verynet.gcint.api.db.hibernate.HibernateDocumentDAO">
+        <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <bean id="activityDAO" class="com.verynet.gcint.api.db.hibernate.HibernateActivityDAO">
+        <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <bean id="answerDAO" class="com.verynet.gcint.api.db.hibernate.HibernateAnswerDAO">
+        <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <bean id="riskDAO" class="com.verynet.gcint.api.db.hibernate.HibernateRiskDAO">
+        <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <bean id="acInformDAO" class="com.verynet.gcint.api.db.hibernate.HibernateACInformDAO">
+        <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <bean id="deficiencyDAO" class="com.verynet.gcint.api.db.hibernate.HibernateDeficiencyDAO">
+        <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <bean id="reunionDAO" class="com.verynet.gcint.api.db.hibernate.HibernateReunionDAO">
+        <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <bean id="notificationDAO" class="com.verynet.gcint.api.db.hibernate.HibernateNotificationDAO">
+        <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <bean id="taskDAO" class="com.verynet.gcint.api.db.hibernate.HibernateTaskDAO">
+        <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <bean id="themeDAO" class="com.verynet.gcint.api.db.hibernate.HibernateThemeDAO">
+        <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <bean id="userAttemptsDAO" class="com.verynet.gcint.api.db.hibernate.HibernateUserAttemptsDAO">
+        <constructor-arg ref="sessionFactory"/>
+    </bean>
+    <!--  **************************  SCHEDULER SERVICE  *************************  -->
+    <bean id="userService" class="com.verynet.gcint.api.services.impl.UserServiceImpl">
+        <property name="userDAO">
+            <ref bean="userDAO"/>
+        </property>
+    </bean>
+    <bean id="roleService" class="com.verynet.gcint.api.services.impl.RoleServiceImpl">
+        <property name="roleDAO">
+            <ref bean="roleDAO"/>
+        </property>
+    </bean>
+    <bean id="entityService" class="com.verynet.gcint.api.services.impl.EntityServiceImpl">
+        <property name="entityDAO">
+            <ref bean="entityDAO"/>
+        </property>
+    </bean>
+    <bean id="strategicObjectiveService" class="com.verynet.gcint.api.services.impl.StrategicObjectiveServiceImpl">
+        <property name="strategicObjectiveDAO">
+            <ref bean="strategicObjectiveDAO"/>
+        </property>
+    </bean>
+    <bean id="nomenclatureService" class="com.verynet.gcint.api.services.impl.NomenclatureServiceImpl">
+        <property name="nomenclatureDAO">
+            <ref bean="nomenclatureDAO"/>
+        </property>
+    </bean>
+    <bean id="processService" class="com.verynet.gcint.api.services.impl.ProcessServiceImpl">
+        <property name="processDAO">
+            <ref bean="processDAO"/>
+        </property>
+    </bean>
+    <bean id="activityProcessService" class="com.verynet.gcint.api.services.impl.ActivityProcessServiceImpl">
+        <property name="activityProcessDAO">
+            <ref bean="activityProcessDAO"/>
+        </property>
+    </bean>
+    <bean id="guideService" class="com.verynet.gcint.api.services.impl.GuideServiceImpl">
+        <property name="guideDAO">
+            <ref bean="guideDAO"/>
+        </property>
+    </bean>
+    <bean id="questionService" class="com.verynet.gcint.api.services.impl.QuestionServiceImpl">
+        <property name="questionDAO">
+            <ref bean="questionDAO"/>
+        </property>
+    </bean>
+    <bean id="documentService" class="com.verynet.gcint.api.services.impl.DocumentServiceImpl">
+        <property name="documentDAO">
+            <ref bean="documentDAO"/>
+        </property>
+    </bean>
+    <bean id="activityService" class="com.verynet.gcint.api.services.impl.ActivityServiceImpl">
+        <property name="activityDAO">
+            <ref bean="activityDAO"/>
+        </property>
+    </bean>
+    <bean id="answerService" class="com.verynet.gcint.api.services.impl.AnswerServiceImpl">
+        <property name="answerDAO">
+            <ref bean="answerDAO"/>
+        </property>
+    </bean>
+    <bean id="riskService" class="com.verynet.gcint.api.services.impl.RiskServiceImpl">
+        <property name="riskDAO">
+            <ref bean="riskDAO"/>
+        </property>
+    </bean>
+    <bean id="acInformService" class="com.verynet.gcint.api.services.impl.ACInformServiceImpl">
+        <property name="ACInformDAO">
+            <ref bean="acInformDAO"/>
+        </property>
+    </bean>
+    <bean id="deficiencyService" class="com.verynet.gcint.api.services.impl.DeficiencyServiceImpl">
+        <property name="deficiencyDAO">
+            <ref bean="deficiencyDAO"/>
+        </property>
+    </bean>
+    <bean id="reunionService" class="com.verynet.gcint.api.services.impl.ReunionServiceImpl">
+        <property name="reunionDAO">
+            <ref bean="reunionDAO"/>
+        </property>
+    </bean>
+    <bean id="notificationService" class="com.verynet.gcint.api.services.impl.NotificationServiceImpl">
+        <property name="notificationDAO">
+            <ref bean="notificationDAO"/>
+        </property>
+    </bean>
+    <bean id="taskService" class="com.verynet.gcint.api.services.impl.TaskServiceImpl">
+        <property name="taskDAO">
+            <ref bean="taskDAO"/>
+        </property>
+    </bean>
+    <bean id="themeService" class="com.verynet.gcint.api.services.impl.ThemeServiceImpl">
+        <property name="themeDAO">
+            <ref bean="themeDAO"/>
+        </property>
+    </bean>
+    <bean id="userAttemptsService" class="com.verynet.gcint.api.services.impl.UserAttemptsServiceImpl">
+        <property name="userAttemptsDAO">
+            <ref bean="userAttemptsDAO"/>
+        </property>
+    </bean>
+    <!--  **************************  ADVICE  *************************  -->
+    <bean id="notificacionAdvice" class="com.verynet.gcint.api.aop.NotificationAdvice"/>
+    <bean id="notificationAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+        <property name="advice">
+            <ref local="notificacionAdvice"/>
+        </property>
+        <property name="pointcut">
+            <bean class="org.springframework.aop.aspectj.AspectJExpressionPointcut">
+                <property name="expression">
+                    <value>execution(* saveActivity*(..))</value>
+                </property>
+            </bean>
+        </property>
+    </bean>
+    <bean id="activityServiceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target">
+            <ref local="activityService"/>
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>notificationAdvisor</value>
+            </list>
+        </property>
+    </bean>
+    <!--  **************************  SERVICE CONTEXT CONFIGURATION  *************************  -->
+    <bean id="serviceContext" class="com.verynet.gcint.api.context.ServiceContext" factory-method="getInstance"
+          destroy-method="destroyInstance">
+        <property name="userService" ref="userService"/>
+        <property name="roleService" ref="roleService"/>
+        <property name="entityService" ref="entityService"/>
+        <property name="strategicObjectiveService" ref="strategicObjectiveService"/>
+        <property name="nomenclatureService" ref="nomenclatureService"/>
+        <property name="processService" ref="processService"/>
+        <property name="activityProcessService" ref="activityProcessService"/>
+        <property name="guideService" ref="guideService"/>
+        <property name="questionService" ref="questionService"/>
+        <property name="documentService" ref="documentService"/>
+        <property name="activityService" ref="activityServiceProxy"/>
+        <property name="answerService" ref="answerService"/>
+        <property name="riskService" ref="riskService"/>
+        <property name="ACInformService" ref="acInformService"/>
+        <property name="deficiencyService" ref="deficiencyService"/>
+        <property name="reunionService" ref="reunionService"/>
+        <property name="notificationService" ref="notificationService"/>
+        <property name="taskService" ref="taskService"/>
+        <property name="themeService" ref="themeService"/>
+        <property name="secundaryFunctions" ref="secundaryFunctions"/>
+        <property name="taskThread" ref="taskThread"/>
+        <property name="userAttemptsService" ref="userAttemptsService"/>
+    </bean>
+    <bean id="userContext" class="com.verynet.gcint.api.context.UserContext" factory-method="getInstance"/>
+    <bean id="context" class="com.verynet.gcint.api.context.Context">
+        <property name="serviceContext">
+            <ref bean="serviceContext"/>
+        </property>
+        <property name="userContext" ref="userContext"/>
+    </bean>
+    <!--  **************************  DATASOURCE  *************************  -->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="driverClassName"
+                  value="${database.driver}"/>
+        <property name="url"
+                  value="${database.url}"/>
+        <property name="username" value="${database.username}"/>
+        <property name="password" value="${database.password}"/>
+        <property name="initialSize" value="5"/>
+        <property name="maxTotal" value="10"/>
+    </bean>
+
+    <!--<bean id="dataSource"-->
+    <!--class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+    <!--<property name="driverClassName" value="${database.driver}"/>-->
+    <!--<property name="url" value="${database.url}"/>-->
+    <!--<property name="username" value="${database.username}"/>-->
+    <!--<property name="password" value="${database.password}"/>-->
+    <!--</bean>-->
+
+    <!--Hibernate Session Factory-->
+    <context:component-scan base-package="com.verynet.gcint.api.db.hibernate"/>
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan">
+            <list>
+                <value>com.verynet.gcint.api.model</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+    </bean>
+    <!--Hibernate Transaction Manager-->
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+    </bean>
+    <!--Liquibase Configuration-->
+    <bean id="commonsLiquibase" class="liquibase.integration.spring.SpringLiquibase">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="changeLog" value="classpath:/liquibase/liquibase-core-data.xml"/>
+        <property name="contexts" value="init_Data"/>
+    </bean>
+    <!--Message Source Configuration-->
+    <!--<bean id="messageSource"-->
+    <!--class="org.springframework.context.support.ResourceBundleMessageSource">-->
+    <!--<property name="basenames">-->
+    <!--<list>-->
+    <!--<value>messages.messages</value>-->
+    <!--</list>-->
+    <!--</property>-->
+    <!--</bean>-->
+    <!--Validation-->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+    <!--Multipart Configuration-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
+    <!--Util Class-->
+    <bean id="controllerUtil" class="com.verynet.gcint.api.util.ControllerUtil"/>
+    <bean id="jasperUtil" class="com.verynet.gcint.api.util.report.JasperUtil"/>
+    <!--Thread Class-->
+    <bean id="secundaryFunctions" class="com.verynet.gcint.api.thread.SecundaryFunctions"/>
+    <bean id="taskThread" class="com.verynet.gcint.api.thread.TaskThread"/>
+</beans>

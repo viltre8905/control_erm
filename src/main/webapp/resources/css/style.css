@@ -1,0 +1,77 @@
+/*
+
+* Override Pages default styles or create your own styles here
+
+*/
+
+.img-responsive {
+    height: 55em !important;
+    width: 100% !important;
+}
+
+.page-container {
+    background: #f0f0f0;
+}
+
+.content {
+    background: #f0f0f0;
+}
+body{
+    background: #f0f0f0;
+}
+
+.page-sidebar {
+    background-color: #2b303b;
+}
+
+.selected-sidebar {
+    background-color: #10cfbd;
+}
+
+#align-right {
+    text-align: right;
+}
+
+textarea.focused {
+    border-color: rgba(0, 0, 0, 0.1) !important;
+    background-color: #f0f0f0;
+}
+
+td > .select2-container-multi .select2-choices {
+    border: 0px;
+    background-color: transparent;
+}
+
+td > .select2-container-multi .select2-choices:hover {
+    border: 1px;
+    background-color: white;
+}
+
+.w-70 {
+    width: 70%;
+}
+
+.w-30 {
+    width: 30%;
+}
+
+.progress-circle-indeterminate {
+    width: 30px;
+    height: 30px;
+}
+
+.span-semi-bold {
+    font-weight: 600 !important;
+}
+
+#calendarContainer {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.calendar {
+    background-color: white;
+}
+#fileText{
+    color: rgba(98, 98, 98, 1);
+}

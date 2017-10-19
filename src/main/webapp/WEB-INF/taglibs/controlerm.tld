@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xsi:schemaLocation="
+        http://java.sun.com/xml/ns/javaee
+        http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+        xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        version="2.1">
+    <tlib-version>1.0</tlib-version>
+    <short-name>controlerm</short-name>
+    <uri>http://www.verynet.com/</uri>
+
+    <tag>
+        <description>
+            Determines if the current user has only the given privilege (comma delimited)
+        </description>
+        <name>hasOnlyRole</name>
+        <tag-class>com.verynet.gcint.web.taglib.RoleTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>role</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>
+            Determines if the current user has not the given privilege (comma delimited)
+        </description>
+        <name>hasNotRole</name>
+        <tag-class>com.verynet.gcint.web.taglib.NotRole</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>role</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+</taglib>

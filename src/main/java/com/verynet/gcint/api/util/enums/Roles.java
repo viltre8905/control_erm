@@ -1,0 +1,16 @@
+package com.verynet.gcint.api.util.enums;
+
+/**
+ * Created by day on 06/09/2016.
+ */
+public enum Roles {
+    ROLE_SUPER_ADMIN,
+    ROLE_ADMIN,
+    ROLE_GENERAL_SUPERVISORY,
+    ROLE_PROCESS_SUPERVISORY,
+    ROLE_SUBPROCESS_SUPERVISORY,
+    ROLE_EXECUTER,
+    ROLE_COMMITTEE_MEMBER,
+    ROLE_SECRETARY_COMMITTEE,
+    ROLE_ACTIVITY_RESPONSIBLE
+}

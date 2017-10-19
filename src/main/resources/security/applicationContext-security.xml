@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+    <import resource="classpath:applicationContext-service.xml"/>
+    <!--<security:jdbc-user-service id="userSecurityService" data-source-ref="dataSource"-->
+    <!--users-by-username-query="select user_name as username, password, enabled from auth_user where user_name=?"-->
+    <!--authorities-by-username-query="select user_name as username, value as authorities from auth_user, auth_role, user_role where auth_user.id = user_role.user_id AND-->
+    <!--user_role.role_id = auth_role.id AND user_name=?"/>-->
+    <security:global-method-security pre-post-annotations="enabled"/>
+    <bean id="encoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder"/>
+    <bean id="userDetailsService" class="com.verynet.gcint.api.auth.CustomUserDetailsService"/>
+    <bean id="ssAuthenticationProvider" class="com.verynet.gcint.api.auth.SSAuthenticationProvider">
+        <property name="userDetailsService">
+            <ref bean="userDetailsService"></ref>
+        </property>
+        <property name="passwordEncoder">
+            <ref bean="encoder"></ref>
+        </property>
+    </bean>
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider ref="ssAuthenticationProvider"/>
+    </security:authentication-manager>
+    <security:http auto-config="true" use-expressions="true">
+        <security:intercept-url pattern="/index**" access="permitAll"/>
+        <security:intercept-url pattern="/home**" access="isAuthenticated()" requires-channel="https"/>
+        <security:intercept-url pattern="/setProcessSelected**" access="isAuthenticated()" requires-channel="https"/>
+        <security:intercept-url pattern="/changePassword**" access="isAuthenticated()" requires-channel="https"/>
+        <security:intercept-url pattern="/profile**" access="isAuthenticated()" requires-channel="https"/>
+        <security:intercept-url pattern="/notification/**" access="isAuthenticated()" requires-channel="https"/>
+        <security:intercept-url pattern="/entity/**" access="isAuthenticated()" requires-channel="https"/>
+        <security:intercept-url pattern="/supervisoryHome**" access="hasRole('ROLE_GENERAL_SUPERVISORY')"
+                                requires-channel="https"/>
+        <security:intercept-url pattern="/supervisoryHome/**" access="hasRole('ROLE_GENERAL_SUPERVISORY')"
+                                requires-channel="https"/>
+        <security:intercept-url pattern="/dashboard**"
+                                access="hasAnyRole('ROLE_GENERAL_SUPERVISORY','ROLE_PROCESS_SUPERVISORY','ROLE_SUBPROCESS_SUPERVISORY')"
+                                requires-channel="https"/>
+        <security:intercept-url pattern="/supervisoryInit**" access="hasRole('ROLE_GENERAL_SUPERVISORY')"
+                                requires-channel="https"/>
+        <security:intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_ADMIN','ROLE_SUPER_ADMIN')"
+                                requires-channel="https"/>
+        <security:intercept-url pattern="/admin/process/**" access="hasRole('ROLE_ADMIN')" requires-channel="https"/>
+        <security:intercept-url pattern="/admin/guide/**" access="hasRole('ROLE_ADMIN')" requires-channel="https"/>
+        <security:intercept-url pattern="/admin/entity/**" access="hasRole('ROLE_SUPER_ADMIN')"
+                                requires-channel="https"/>
+        <security:intercept-url pattern="/admin/task/**" access="hasRole('ROLE_SUPER_ADMIN')" requires-channel="https"/>
+        <security:intercept-url pattern="/control-environment/guide/**"
+                                access="hasAnyRole('ROLE_GENERAL_SUPERVISORY','ROLE_PROCESS_SUPERVISORY','ROLE_SUBPROCESS_SUPERVISORY','ROLE_ACTIVITY_RESPONSIBLE')"
+                                requires-channel="https"/>
+        <security:intercept-url pattern="/control-environment/process/**"
+                                access="hasAnyRole('ROLE_GENERAL_SUPERVISORY','ROLE_PROCESS_SUPERVISORY','ROLE_SUBPROCESS_SUPERVISORY')"
+                                requires-channel="https"/>
+        <security:intercept-url pattern="/control-environment/dashboard/**"
+                                access="hasAnyRole('ROLE_GENERAL_SUPERVISORY','ROLE_PROCESS_SUPERVISORY','ROLE_SUBPROCESS_SUPERVISORY')"
+                                requires-channel="https"/>
+        <security:intercept-url pattern="/control-environment/activity/**"
+                                access="hasAnyRole('ROLE_GENERAL_SUPERVISORY','ROLE_PROCESS_SUPERVISORY','ROLE_SUBPROCESS_SUPERVISORY','ROLE_EXECUTER','ROLE_ACTIVITY_RESPONSIBLE')"
+                                requires-channel="https"/>
+
+        <security:intercept-url pattern="/risk/guide/**"
+                                access="hasAnyRole('ROLE_GENERAL_SUPERVISORY','ROLE_PROCESS_SUPERVISORY','ROLE_SUBPROCESS_SUPERVISORY','ROLE_ACTIVITY_RESPONSIBLE')"
+                                requires-channel="https"/>
+        <security:intercept-url pattern="/risk/process/**"
+                                access="hasAnyRole('ROLE_GENERAL_SUPERVISORY','ROLE_PROCESS_SUPERVISORY','ROLE_SUBPROCESS_SUPERVISORY')"
+                                requires-channel="https"/>
+        <security:intercept-url pattern="/risk/dashboard/**"
+                                access="hasAnyRole('ROLE_GENERAL_SUPERVISORY','ROLE_PROCESS_SUPERVISORY','ROLE_SUBPROCESS_SUPERVISORY')"
+                                requires-channel="https"/>
+        <security:intercept-url pattern="/risk/management/**"
+                                access="hasAnyRole('ROLE_GENERAL_SUPERVISORY','ROLE_PROCESS_SUPERVISORY','ROLE_SUBPROCESS_SUPERVISORY')"
+                                requires-channel="https"/>
+        <security:intercept-url pattern="/risk/activity/**"
+                                access="hasAnyRole('ROLE_GENERAL_SUPERVISORY','ROLE_PROCESS_SUPERVISORY','ROLE_SUBPROCESS_SUPERVISORY','ROLE_EXECUTER','ROLE_ACTIVITY_RESPONSIBLE')"
+                                requires-channel="https"/>
+
+        <security:intercept-url pattern="/control-activity/guide/**"
+                                access="hasAnyRole('ROLE_GENERAL_SUPERVISORY','ROLE_PROCESS_SUPERVISORY','ROLE_SUBPROCESS_SUPERVISORY','ROLE_ACTIVITY_RESPONSIBLE')"
+                                requires-channel="https"/>
+        <security:intercept-url pattern="/control-activity/process/**"
+                                access="hasAnyRole('ROLE_GENERAL_SUPERVISORY','ROLE_PROCESS_SUPERVISORY','ROLE_SUBPROCESS_SUPERVISORY')"
+                                requires-channel="https"/>
+        <security:intercept-url pattern="/control-activity/dashboard/**"
+                                access="hasAnyRole('ROLE_GENERAL_SUPERVISORY','ROLE_PROCESS_SUPERVISORY','ROLE_SUBPROCESS_SUPERVISORY')"
+                                requires-channel="https"/>
+        <security:intercept-url pattern="/control-activity/activity/**"
+                                access="hasAnyRole('ROLE_GENERAL_SUPERVISORY','ROLE_PROCESS_SUPERVISORY','ROLE_SUBPROCESS_SUPERVISORY','ROLE_EXECUTER','ROLE_ACTIVITY_RESPONSIBLE')"
+                                requires-channel="https"/>
+
+        <security:intercept-url pattern="/info-and-com/guide/**"
+                                access="hasAnyRole('ROLE_GENERAL_SUPERVISORY','ROLE_PROCESS_SUPERVISORY','ROLE_SUBPROCESS_SUPERVISORY','ROLE_ACTIVITY_RESPONSIBLE')"
+                                requires-channel="https"/>
+        <security:intercept-url pattern="/info-and-com/process/**"
+                                access="hasAnyRole('ROLE_GENERAL_SUPERVISORY','ROLE_PROCESS_SUPERVISORY','ROLE_SUBPROCESS_SUPERVISORY')"
+                                requires-channel="https"/>
+        <security:intercept-url pattern="/info-and-com/dashboard/**"
+                                access="hasAnyRole('ROLE_GENERAL_SUPERVISORY','ROLE_PROCESS_SUPERVISORY','ROLE_SUBPROCESS_SUPERVISORY')"
+                                requires-channel="https"/>
+        <security:intercept-url pattern="/info-and-com/activity/**"
+                                access="hasAnyRole('ROLE_GENERAL_SUPERVISORY','ROLE_PROCESS_SUPERVISORY','ROLE_SUBPROCESS_SUPERVISORY','ROLE_EXECUTER','ROLE_ACTIVITY_RESPONSIBLE')"
+                                requires-channel="https"/>
+
+        <security:intercept-url pattern="/monitoring/guide/**"
+                                access="hasAnyRole('ROLE_GENERAL_SUPERVISORY','ROLE_PROCESS_SUPERVISORY','ROLE_SUBPROCESS_SUPERVISORY','ROLE_ACTIVITY_RESPONSIBLE')"
+                                requires-channel="https"/>
+        <security:intercept-url pattern="/monitoring/process/**"
+                                access="hasAnyRole('ROLE_GENERAL_SUPERVISORY','ROLE_PROCESS_SUPERVISORY','ROLE_SUBPROCESS_SUPERVISORY')"
+                                requires-channel="https"/>
+        <security:intercept-url pattern="/monitoring/dashboard/**"
+                                access="hasAnyRole('ROLE_GENERAL_SUPERVISORY','ROLE_PROCESS_SUPERVISORY','ROLE_SUBPROCESS_SUPERVISORY')"
+                                requires-channel="https"/>
+        <security:intercept-url pattern="/monitoring/activity/**"
+                                access="hasAnyRole('ROLE_GENERAL_SUPERVISORY','ROLE_PROCESS_SUPERVISORY','ROLE_SUBPROCESS_SUPERVISORY','ROLE_EXECUTER','ROLE_ACTIVITY_RESPONSIBLE')"
+                                requires-channel="https"/>
+        <security:intercept-url pattern="/monitoring/committee/**"
+                                access="hasAnyRole('ROLE_COMMITTEE_MEMBER','ROLE_SECRETARY_COMMITTEE')"
+                                requires-channel="https"/>
+
+        <security:intercept-url pattern="/login**" access="permitAll" requires-channel="https"/>
+        <security:intercept-url pattern="/error**" access="permitAll"/>
+        <security:form-login authentication-failure-url="/login" login-page="/login" default-target-url="/home"/>
+        <security:logout logout-success-url="/login" logout-url="/logout"/>
+        <security:http-basic/>
+    </security:http>
+</beans>
